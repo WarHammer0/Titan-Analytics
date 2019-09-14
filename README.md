@@ -20,6 +20,8 @@ The input to the pipeline is a video, so it is essential to take a screenshot at
 
 A Keras Retinanet model was trained on 300 training images. The training images were extracted from Hudl, annotated with RectLabel, and augmented with OpenCV. The model works well with a .88 mAP and stores the locations of each object of class 'player'. The following are results of running the object detection model on a snap frame screenshot. 
 
+![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/object_detection.jpg)
+
 ## 3. Find the field lines using Hough transform.
 Identifying and knowing the angle of the field lines is very essential for recognizing perspective and the Line of Scrimmage. The safe assumption is that the field background will be green and the field lines will be white. First, a Canny Edge Detector is applied to the frame and then a Hough Transform is used to find the angles of the lines. The field lines are colored red in the following examples. 
 
@@ -31,6 +33,7 @@ At this point, all the players on the field are considered in the same class. So
 
 ## 6. Use optical flow to track the offensive player's movements
 Once the offense is isolated, KLT Tracking is used only on the offensive players. KLT tracking is very helpful because it tracks a block of pixels rather than a single pixel, so if players cross field lines, their box is not dropped. However, when players overlap, there has been some trouble in maintainig the box on the right player. The lines drawn by each player is considered their 'route' and is drawn on the video and also a black screen. 
+![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg)
 
 ## 7. Match players movements to standard football routes and determine the offensive play. 
 There are about 9 standard football routes in the 'route tree'. Using Mean Squared Error, the route drawn by Step 6 is matched to each standard route to determine which one it is. By analyzing all the players' routes, the total play can be determined. 
