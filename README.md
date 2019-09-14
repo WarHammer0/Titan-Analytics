@@ -29,8 +29,8 @@ Identifying and knowing the angle of the field lines is very essential for recog
 Another object detection model is applied to find the 'box'. The 'box' is an imaginary area in football that includes the lineman, linebackers, and offensive backfield. The Line of Scrimmage will always run through the center of the 'box', so it is important to get the correct location of this object. The model was trained on the same images as the earlier model. It is not gaurunteed that a white field line will go directly through the box, so the two closest field lines are found and their angles are averaged. This angle is used as the angle of the line of scrimmage and drawn through the center of the box. 
 
 ![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box.jpg)
-![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los.jpg)
-![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box2.jpg)
+![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los.png)
+![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box2.png)
 
 ## 5. Determine the offensive side and isolate players on the offense
 At this point, all the players on the field are considered in the same class. So, using the line of scrimmage from Step 4, the offense and defense are separated into two teams based on their side of the line. However, it is unknown which group is the offense or defense, so an optical flow algorithm is ran on all the players. One football assumption is that the offense will be going forward while the defense will be backing up in response, so the overall X displacement is calculated using optical flow. The side that has a positive X displacement is considered the offense, and the opposite for the defense. 
