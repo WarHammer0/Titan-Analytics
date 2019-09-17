@@ -58,7 +58,13 @@ At this point, all the players on the field are considered in the same class. So
 
 ## 6. Use optical flow to track the offensive player's movements
 Once the offense is isolated, KLT Tracking is used only on the offensive players. KLT tracking is very helpful because it tracks a block of pixels rather than a single pixel, so if players cross field lines, their box is not dropped. However, when players overlap, there has been some trouble in maintainig the box on the right player. The lines drawn by each player is considered their 'route' and is drawn on the video and also a black screen. 
+![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.jpg)
 ![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg)
 
 ## 7. Match players movements to standard football routes and determine the offensive play. 
-There are about 9 standard football routes in the 'route tree'. Using Mean Squared Error, the route drawn by Step 6 is matched to each standard route to determine which one it is. By analyzing all the players' routes, the total play can be determined. 
+There are about 9 standard football routes in the 'route tree'. Using Mean Squared Error, the route drawn by Step 6 will be matched to each standard route and determined which one it is. By analyzing all the players' routes, the entire play's scheme can be calculated. 
+
+## Future Goals
+I hope to add more functionality to the pipeline to determine pass/run tendencies and who posseses the ball at any time. Finding the ball will be decently difficult since it is a small object on a large field, that also can be covered by some of the players. However, after completing these two tasks, many more useful statistics can be extracted, processed, and documented for useful scouting reports. 
+
+
