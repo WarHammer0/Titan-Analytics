@@ -14,7 +14,21 @@ This project uses object detection/classification models and optical flow to gat
 
 ## 1. Determine the time of snap and take a screenshot of the snap frame
 
-The input to the pipeline is a video, so it is essential to take a screenshot at the time of the snap. This is done by running a Structual Similarity model every fifteen frames. The idea is that while the quarterback is calling the cadence, the offense will stay still and wait for the ball to be snapped. So whichever two frames have the most structural similarity are considered the time of the snap and a screenshot is taken. The following are examples of screenshots at the time of the snap. 
+The input to the pipeline is a video, so it is essential to take a screenshot at the time of the snap. This is done by running a Structual Similarity Model every 15 frames in the video. The idea is that while the quarterback is calling the cadence, the offense will stay still and wait for the ball to be snapped. So, the two frames that have the most structural similarity are considered to be time of the snap and a screenshot is taken. The algorithm is as follows 
+```
+frame_counter=0
+lowest_SSIM = 0
+cap = cv2.VideoCapture(video_path)
+while(1):
+  ret, new_frame = cap.read()
+  if frame_counter%15==0:
+     s = ssim(old_frame, new_frame, multichannel=True)
+     if s > lowest_SSIM:
+        snapFrame = new_frame
+        lowest_SSIM = s
+     else:
+        break  
+```
 
 ## 2. Run the object detection model to find the locations of the players. 
 
