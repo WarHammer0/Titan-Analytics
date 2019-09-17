@@ -58,7 +58,7 @@ At this point, all the players on the field are considered in the same class. So
 
 ## 6. Use optical flow to track the offensive player's movements
 Once the offense is isolated, KLT Tracking is used only on the offensive players. KLT tracking is very helpful because it tracks a block of pixels rather than a single pixel, so if players cross field lines, their box is not dropped. However, when players overlap, there has been some trouble in maintainig the box on the right player. The lines drawn by each player is considered their 'route' and is drawn on the video and also a black screen. 
-![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.jpg)
+![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.png)
 ![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg)
 
 ## 7. Match players movements to standard football routes and determine the offensive play. 
