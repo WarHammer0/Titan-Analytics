@@ -50,7 +50,7 @@ def hough_transform(image_path):
 ## 4. Find the 'box' - main line of scrimmage area - and locate the Line of Scrimmage
 Another object detection model is applied to find the 'box'. The 'box' is an imaginary area in football that includes the lineman, linebackers, and offensive backfield. The Line of Scrimmage will always run through the center of the 'box', so it is important to get the correct location of this object. The model was trained on the same images as the earlier model. It is not gaurunteed that a white field line will go directly through the box, so the two closest field lines are found and their angles are averaged. This angle is used as the angle of the line of scrimmage and drawn through the center of the box. 
 
-Solarized dark             |  Solarized Ocean
+'Box' object detection             |  Line of Scrimmage
 :-------------------------:|:-------------------------:
 ![](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box2.png)  |  ![](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los.png)
 
@@ -59,8 +59,11 @@ At this point, all the players on the field are considered in the same class. So
 
 ## 6. Use optical flow to track the offensive player's movements
 Once the offense is isolated, KLT Tracking is used only on the offensive players. KLT tracking is very helpful because it tracks a block of pixels rather than a single pixel, so if players cross field lines, their box is not dropped. However, when players overlap, there has been some trouble in maintainig the box on the right player. The lines drawn by each player is considered their 'route' and is drawn on the video and also a black screen. 
-![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.png)
-![Routes](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg)
+
+Routes on image             |  Routes on black page
+:-------------------------:|:-------------------------:
+![](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.png)  |  ![](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg)
+
 
 ## 7. Match players movements to standard football routes and determine the offensive play. 
 There are about 9 standard football routes in the 'route tree'. Using Mean Squared Error, the route drawn by Step 6 will be matched to each standard route and determined which one it is. By analyzing all the players' routes, the entire play's scheme can be calculated. 
