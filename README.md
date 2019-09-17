@@ -37,14 +37,21 @@ A Keras Retinanet model was trained on 300 training images. The training images 
 ![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/object_detection.jpg)
 
 ## 3. Find the field lines using Hough transform.
-Identifying and knowing the angle of the field lines is very essential for recognizing perspective and the Line of Scrimmage. The safe assumption is that the field background will be green and the field lines will be white. First, a Canny Edge Detector is applied to the frame and then a Hough Transform is used to find the angles of the lines. The field lines are colored red in the following examples. 
-
+Identifying and knowing the angle of the field lines is very essential for recognizing perspective and the Line of Scrimmage. The safe assumption is that the field background will be green and the field lines will be white. First, a Canny Edge Detector is applied to the frame and then a Hough Transform is used to find the angles of the lines. The following function returns the angles and midpoints of the Hough lines on the image. 
+```
+def hough_transform(image_path):
+    img = cv2.imread(image_path)
+    wimg = only_white(img)
+    gray = cv2.cvtColor(wimg,cv2.COLOR_BGR2GRAY)
+    edges = cv2.Canny(gray,200,400,apertureSize = 3)
+    lines = cv2.HoughLines(edges,1,np.pi/90,100)
+    return lines
+```
 ## 4. Find the 'box' - main line of scrimmage area - and locate the Line of Scrimmage
 Another object detection model is applied to find the 'box'. The 'box' is an imaginary area in football that includes the lineman, linebackers, and offensive backfield. The Line of Scrimmage will always run through the center of the 'box', so it is important to get the correct location of this object. The model was trained on the same images as the earlier model. It is not gaurunteed that a white field line will go directly through the box, so the two closest field lines are found and their angles are averaged. This angle is used as the angle of the line of scrimmage and drawn through the center of the box. 
 
-![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box.jpg)
-![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los.png)
 ![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los_box2.png)
+![Object Detection](https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/los.png)
 
 ## 5. Determine the offensive side and isolate players on the offense
 At this point, all the players on the field are considered in the same class. So, using the line of scrimmage from Step 4, the offense and defense are separated into two teams based on their side of the line. However, it is unknown which group is the offense or defense, so an optical flow algorithm is ran on all the players. One football assumption is that the offense will be going forward while the defense will be backing up in response, so the overall X displacement is calculated using optical flow. The side that has a positive X displacement is considered the offense, and the opposite for the defense. 
