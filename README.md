@@ -62,7 +62,7 @@ Once the offense is isolated, KLT Tracking is used only on the offensive players
 
 Routes on image           |  Routes on black page
 :-------------------------:|:-------------------------:
-<img src="https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.png" width="40%"> |  <img src="https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg" width="40%">
+<img src="https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes_on_image.png" width="100%"> |  <img src="https://github.com/Aneesh1212/Titan-Analytics/blob/master/pictures/routes1.jpg" width="100%">
 
 
 ## 7. Match players movements to standard football routes and determine the offensive play. 
